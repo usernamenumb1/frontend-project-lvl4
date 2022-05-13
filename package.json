@@ -14,8 +14,8 @@
     "transform": {}
   },
   "repository": {
-    "type": "git",
-    "url": "git@github.com:hexlet-components/projects-frontend-l4-server.git"
+    "type": "git", 
+    "url": "https://github.com/usernamenumb1/frontend-project-lvl4.git"
   },
   "author": "Kirill Mokevnin",
   "license": "ISC",
@@ -39,7 +39,9 @@
     "point-of-view": "^5.1.0",
     "popper.js": "^1.16.1",
     "pug": "^3.0.2",
-    "react": "^17.0.2",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-router-dom": "^6.3.0",
     "regenerator-runtime": "^0.13.9"
   },
   "devDependencies": {
