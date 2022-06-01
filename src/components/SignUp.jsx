@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -6,34 +6,23 @@ import axios from "axios";
 import routes from "../routes.js";
 import { AuthContext } from "./context/AuthProvider.jsx";
 
-const Login = () => {
-  const [isInputValid, setInputValid] = useState('valid');
-  const { logIn } = useContext(AuthContext);
-  const navigate = useNavigate();
-  const setIsAuthorised = ({ data }) => {
-    logIn(data);
-    navigate(routes.mainChatPage());
-  };
+export default () => {
   const formik = useFormik({
     initialValues: {
       username: '',
       password: '',
+      confirmPassword: '',
     },
     validationSchema: Yup.object({
       username: Yup.string()
         .required('Required'),
       password: Yup.string()
-        .min(5, 'to short')
         .required('Required'),
+      confirmPassword: Yup.string()
+        .required('Required').oneOf([Yup.ref('password'), null], 'Should match password!'),
     }),
-    onSubmit: ({ username, password }) => {
-      console.log(formik.errors);
-      axios.post('api/v1/login', { username, password })
-        .then(setIsAuthorised)
-        .catch(({ response }) => {
-          console.log(response);
-          if (response.status === 401) formik.errors.password = response.statusText;
-        });
+    onSubmit: (data) => {
+      console.log(data);
     },
   });
   return (
@@ -45,8 +34,8 @@ const Login = () => {
               <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
                 <img src="https://i.ibb.co/s3LZHBB/login.jpg" alt="Log in" />
               </div>
-              <form onSubmit={(e) => { e.stopPropagation(); e.preventDefault(); formik.handleSubmit(e); }} className="col-12 col-md-6 mt-3 mt-mb-0 needs-validation" noValidate>
-                <h1 className="text-center mb-4">Log in</h1>
+              <form onSubmit={(e) => { e.preventDefault(); formik.handleSubmit(e); }} className="col-12 col-md-6 mt-3 mt-mb-0">
+                <h1 className="text-center mb-4">Registration</h1>
                 <div className="form-floating mb-3">
                   <input
                     id="username"
@@ -72,9 +61,21 @@ const Login = () => {
                     value={formik.values.password}
                   />
                   <label htmlFor="password" className="form-label">Password</label>
-                  <div className="invalid-tooltip">{formik.errors.password}</div>
                 </div>
-                <button type="submit" className="w-100 mb-3 btn btn-outline-primary" onClick={console.log(formik.touched)}>Log in</button>
+                <div className="form-floating mb-3">
+                  <input
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type="text"
+                    className="form-control"
+                    required
+                    placeholder="Confirm password"
+                    onChange={formik.handleChange}
+                    value={formik.values.confirmPassword}
+                  />
+                  <label htmlFor="password" className="form-label">Confirm password</label>
+                </div>
+                <button type="submit" className="w-100 mb-3 btn btn-outline-primary">Sign up</button>
               </form>
             </div>
           </div>
@@ -83,5 +84,3 @@ const Login = () => {
     </div>
   );
 };
-
-export default Login;

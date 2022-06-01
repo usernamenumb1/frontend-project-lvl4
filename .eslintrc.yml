@@ -11,7 +11,7 @@ extends:
   - "plugin:functional/external-recommended"
   - "plugin:functional/recommended"
 
-parser: babel-eslint
+# parser: babel-eslint
 
 env:
   browser: true
@@ -36,3 +36,8 @@ rules:
   no-param-reassign: 0
   max-len: ["error", { "code": 3000 }]
   react-hooks/rules-of-hooks: 'error'
+  quotes: 0
+  react/function-component-definition: 0
+  jsx-a11y/label-has-associated-control: 0
+  react/jsx-no-constructed-context-values: 0
+  no-underscore-dangle: 0
