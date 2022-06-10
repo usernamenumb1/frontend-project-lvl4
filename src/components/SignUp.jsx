@@ -19,7 +19,8 @@ export default () => {
       password: Yup.string()
         .required('Required'),
       confirmPassword: Yup.string()
-        .required('Required').oneOf([Yup.ref('password'), null], 'Should match password!'),
+        .required('Required')
+        .oneOf([Yup.ref('password'), null], 'Should match password!'),
     }),
     onSubmit: (data) => {
       console.log(data);

@@ -15,14 +15,13 @@ import Chat from "./components/Chat.jsx";
 
 export default () => {
   const { isAuthorised } = useContext(AuthContext);
-  console.log(isAuthorised);
   return (
     <div className="d-flex flex-column h-100">
       <Nav />
       <Routes>
         <Route path={routes.loginPage()} element={<Login />} />
         <Route path={routes.signUpPage()} element={<SignUp />} />
-        <Route path={routes.mainChatPage()} element={isAuthorised === 'authorised' ? <Chat /> : <Navigate to="/login" />} />
+        <Route path={routes.mainChatPage()} element={isAuthorised !== 'no token' ? <Chat /> : <Navigate to="/login" />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

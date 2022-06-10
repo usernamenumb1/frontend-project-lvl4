@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -7,7 +7,7 @@ import routes from "../routes.js";
 import { AuthContext } from "./context/AuthProvider.jsx";
 
 const Login = () => {
-  const [isInputValid, setInputValid] = useState('valid');
+  // const [isInputValid, setInputValid] = useState('valid');
   const { logIn } = useContext(AuthContext);
   const navigate = useNavigate();
   const setIsAuthorised = ({ data }) => {
