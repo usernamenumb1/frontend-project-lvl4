@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from "react";
-// import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import * as Yup from "yup";
 import { useFormik } from 'formik';
 import { BsArrowRightSquare } from 'react-icons/bs';
@@ -8,6 +8,7 @@ import { apiContext } from "../context/APIProvider.jsx";
 export default () => {
   const { sendMessage } = useContext(apiContext);
   const username = localStorage.getItem("username");
+  const currentChannelId = useSelector((state) => state.channelsStore.currentChannelId);
   const inputRef = useRef();
   const formik = useFormik({
     initialValues: {
@@ -18,7 +19,7 @@ export default () => {
     }),
     onSubmit: ({ message }, actions) => {
       console.log(message);
-      sendMessage({ body: message, username });
+      sendMessage({ body: message, username, channelId: currentChannelId });
       console.log(inputRef.current.value);
       actions.resetForm();
       inputRef.current.focus();

@@ -1,20 +1,17 @@
 import React, { useEffect, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import cn from 'classnames';
-import { GrChannel } from 'react-icons/gr';
 import { AuthContext } from './context/AuthProvider.jsx';
 import { addMessage } from '../slices/messagesSlice.js';
-import { addChanel, setId } from '../slices/chanelsSlice.js';
+import { addChannel, setId } from '../slices/channelsSlice.js';
 import MessagesListing from './messages/MessagesListing.jsx';
 import MessagesSending from './messages/MassagesSending.jsx';
+import ChannelsList from './channels/ChannelsList.jsx';
 
 export default () => {
   const dispatch = useDispatch();
   const { isAuthorised } = useContext(AuthContext);
-  const channelsFromState = useSelector((state) => state.chanelsStore.chanels);
   const messagesFromState = useSelector((state) => state.messagesStore.messages);
-  const currentChannelIdFromState = useSelector((state) => state.chanelsStore.currentChannelId);
 
   const getReq = () => {
     axios.get('/api/v1/data', { headers: { Authorization: `Bearer ${isAuthorised}` } })
@@ -24,7 +21,7 @@ export default () => {
         console.log(currentChannelId);
         console.log(messages);
         dispatch(addMessage(messages));
-        dispatch(addChanel(channels));
+        dispatch(addChannel(channels));
         dispatch(setId(currentChannelId));
       });
   };
@@ -41,16 +38,7 @@ export default () => {
               <span>+</span>
             </button>
           </div>
-          <ul className="nav flex-column nav-pills nav-fill px-2">
-            {channelsFromState.map((chan) => (
-              <li key={chan.id} className="nav-item w-100">
-                <button type="button" className={cn('w-100 rounded-1 text-start btn', { 'btn-secondary': chan.id === currentChannelIdFromState })}>
-                  <GrChannel className="me-2 mb-1" />
-                  {chan.name}
-                </button>
-              </li>
-            ))}
-          </ul>
+          <ChannelsList />
         </div>
         <div className="col h-100 p-0">
           <div className="d-flex flex-column h-100">
