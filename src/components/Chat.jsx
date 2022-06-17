@@ -31,15 +31,7 @@ export default () => {
   return (
     <div className="container h-100 my-4 shadow rounded">
       <div className="row bg-white h-100 flex-md-row">
-        <div className="col-4  col-md-2 border-end pt-5 px-0 bg-light">
-          <div className="d-flex justify-content-between mb-2 ps-4 pe-2">
-            <span>Channels</span>
-            <button type="button" className="btn btn-group-vertical text-primary p-0">
-              <span>+</span>
-            </button>
-          </div>
-          <ChannelsList />
-        </div>
+        <ChannelsList />
         <div className="col h-100 p-0">
           <div className="d-flex flex-column h-100">
             <div className="bg-light mb-4 p-3 shadow-sm">
