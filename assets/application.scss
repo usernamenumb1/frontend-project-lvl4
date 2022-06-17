@@ -1,1 +1,54 @@
 @import '~bootstrap/scss/bootstrap';
+
+.dropdown-toggle::after {
+    display: none;
+  }
+
+  .btn-cadetblue-nohover {
+    color: #fff;
+    background-color: #D2B48C;
+    border-color: #D2B48C;
+  }
+  .btn-cadetblue-nohover:hover {
+    color: #fff;
+    background-color: #D2B48C;
+    border-color: #D2B48C;
+  }
+  .btn-cadetblue {
+    color: #fff;
+    background-color: #D2B48C;
+    border-color: #D2B48C;
+  }
+  .btn-cadetblue:hover {
+    color: #fff;
+    background-color: #ceae83;
+    border-color: #ceae83;
+  }
+  .btn-nocolor {
+    color: #212529;
+    background-color: transparent;
+    border-color: transparent;
+  }
+  .btn-nocolor:hover {
+    color: #212529;
+    background-color: #DCDCDC;
+    border-color: #DCDCDC;
+  }
+  .bg-antiqueLight {
+    background-color: #FAEBD7;
+  }
+  .btn-outline-maroon {
+    color: #8f0c08;
+    border-color: #8f0c08;
+  }
+  .btn-outline-maroon:hover {
+    color: #fff;
+    background-color: #8f0c08;
+    border-color: #8f0c08;
+  }
+  .maroon {
+      color: #8f0c08;
+  }
+  .maroon:hover {
+      color: #8f0d08da;
+  }

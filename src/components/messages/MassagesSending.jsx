@@ -39,7 +39,7 @@ export default () => {
             type="text"
             className="border-0 p-0 ps-2 form-control bg-light"
           />
-          <button type="submit" aria-label="Send" className="btn btn-group-vertical mx-1 p-0"><BsArrowRightSquare size="2em" /></button>
+          <button type="submit" aria-label="Send" className="btn btn-group-vertical mx-1 p-0 maroon"><BsArrowRightSquare size="2em" /></button>
         </div>
       </form>
     </div>

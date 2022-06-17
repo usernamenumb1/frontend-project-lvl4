@@ -14,7 +14,7 @@ export default () => {
     <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white rounded-1">
       <div className="container">
         <Link className="navbar-brand text-dark text-decoration-none" to="/">Chat</Link>
-        {isAuthorised === 'no token' ? null : <button type="button" className="btn btn-outline-primary" onClick={handleClick}>Log out</button>}
+        {isAuthorised === 'no token' ? null : <button type="button" className="btn btn-outline-maroon rounded-3" onClick={handleClick}>Log out</button>}
       </div>
     </nav>
   );
