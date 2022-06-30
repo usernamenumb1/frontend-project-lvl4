@@ -7,7 +7,7 @@ import { setIsOpen } from "../../slices/modalSlice.js";
 import { apiContext } from "../context/APIProvider.jsx";
 
 export default () => {
-  const { addNewChannel } = useContext(apiContext);
+  const { emitAddNewChannel } = useContext(apiContext);
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.modalStore.isOpen);
   const formik = useFormik({
@@ -19,7 +19,7 @@ export default () => {
     }),
     onSubmit: ({ channelName }) => {
       dispatch(setIsOpen({ type: 'NONE', isOpen: false }));
-      addNewChannel({ name: channelName });
+      emitAddNewChannel({ name: channelName });
     },
   });
   const handleClose = () => {

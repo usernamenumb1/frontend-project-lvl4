@@ -6,7 +6,7 @@ import { BsArrowRightSquare } from 'react-icons/bs';
 import { apiContext } from "../context/APIProvider.jsx";
 
 export default () => {
-  const { sendMessage } = useContext(apiContext);
+  const { emitSendMessage } = useContext(apiContext);
   const username = localStorage.getItem("username");
   const currentChannelId = useSelector((state) => state.channelsStore.currentChannelId);
   const inputRef = useRef();
@@ -19,8 +19,7 @@ export default () => {
     }),
     onSubmit: ({ message }, actions) => {
       console.log(message);
-      sendMessage({ body: message, username, channelId: currentChannelId });
-      console.log(inputRef.current.value);
+      emitSendMessage({ body: message, username, channelId: currentChannelId });
       actions.resetForm();
       inputRef.current.focus();
     },

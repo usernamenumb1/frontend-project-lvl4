@@ -20,12 +20,10 @@ if (process.env.NODE_ENV !== 'production') {
 
 const root = ReactDOM.createRoot(document.querySelector('#chat'));
 const socket = io();
-// socket.emit('newMessage', (mess) => {
-//   console.log(mess);
-// });
 socket.on('connect', () => {
   console.log('connected');
 });
+
 console.log(socket);
 root.render(
   <BrowserRouter>
