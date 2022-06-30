@@ -5,6 +5,7 @@ import { GrChannel } from 'react-icons/gr';
 import { BsChevronDown } from "react-icons/bs";
 import { Dropdown, Button, ButtonGroup } from "react-bootstrap";
 import { setId } from "../../slices/channelsSlice.js";
+import { setIsOpen } from "../../slices/modalSlice.js";
 
 export default ({ channel: { name, id, removable } }) => {
   const currentChannelId = useSelector((state) => state.channelsStore.currentChannelId);
@@ -12,11 +13,14 @@ export default ({ channel: { name, id, removable } }) => {
   const handleClick = () => {
     dispatch(setId(id));
   };
+  const handleRemove = () => {
+    dispatch(setIsOpen({ type: 'REMOVE_CHANNEL', isOpen: true, extraData: { channelId: id } }));
+  };
   if (removable) {
     return (
       <Dropdown as={ButtonGroup} className="d-flex mb-1">
         <Button
-          variant={cn('felx-grow-0 w-100 text-start btn', { 'btn-cadetblue-nohover': id === currentChannelId, 'btn-nocolor': id !== currentChannelId })}
+          variant={cn('w-100 text-start text-truncate btn', { 'btn-cadetblue-nohover': id === currentChannelId, 'btn-nocolor': id !== currentChannelId })}
           onClick={handleClick}
         >
           <GrChannel className="me-2 mb-1 d-none d-xl-inline" />
@@ -28,7 +32,7 @@ export default ({ channel: { name, id, removable } }) => {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <Dropdown.Item href="#/action-1">Delete</Dropdown.Item>
+          <Dropdown.Item href="#/action-1" onClick={handleRemove}>Delete</Dropdown.Item>
           <Dropdown.Item href="#/action-2">Rename</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
@@ -37,7 +41,7 @@ export default ({ channel: { name, id, removable } }) => {
   return (
     <button
       type="button"
-      className={cn('w-100 rounded-1 text-start btn mb-1', { 'btn-cadetblue': id === currentChannelId, 'btn-nocolor': id !== currentChannelId })}
+      className={cn('w-100 rounded-1 text-start btn mb-1', { 'btn-cadetblue-nohover': id === currentChannelId, 'btn-nocolor': id !== currentChannelId })}
       onClick={handleClick}
     >
       <GrChannel className="me-2 mb-1 d-none d-xl-inline" />
