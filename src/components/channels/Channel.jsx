@@ -16,6 +16,9 @@ export default ({ channel: { name, id, removable } }) => {
   const handleRemove = () => {
     dispatch(setIsOpen({ type: 'REMOVE_CHANNEL', isOpen: true, extraData: { channelId: id } }));
   };
+  const handleRename = () => {
+    dispatch(setIsOpen({ type: 'RENAME_CHANNEL', isOpen: true, extraData: { channelId: id } }));
+  };
   if (removable) {
     return (
       <Dropdown as={ButtonGroup} className="d-flex mb-1">
@@ -33,7 +36,7 @@ export default ({ channel: { name, id, removable } }) => {
 
         <Dropdown.Menu>
           <Dropdown.Item href="#/action-1" onClick={handleRemove}>Delete</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">Rename</Dropdown.Item>
+          <Dropdown.Item href="#/action-2" onClick={handleRename}>Rename</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     );
