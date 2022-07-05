@@ -4,10 +4,12 @@ import cn from 'classnames';
 import { GrChannel } from 'react-icons/gr';
 import { BsChevronDown } from "react-icons/bs";
 import { Dropdown, Button, ButtonGroup } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import { setId } from "../../slices/channelsSlice.js";
 import { setIsOpen } from "../../slices/modalSlice.js";
 
 export default ({ channel: { name, id, removable } }) => {
+  const { t } = useTranslation();
   const currentChannelId = useSelector((state) => state.channelsStore.currentChannelId);
   const dispatch = useDispatch();
   const handleClick = () => {
@@ -27,7 +29,7 @@ export default ({ channel: { name, id, removable } }) => {
           onClick={handleClick}
         >
           <GrChannel className="me-2 mb-1 d-none d-xl-inline" />
-          {name}
+          {t('chatPage.channelsBlock.channelName', { channelName: name })}
         </Button>
 
         <Dropdown.Toggle split variant={cn('btn p-1 p-xl-2', { 'btn-cadetblue': id === currentChannelId, 'btn-nocolor': id !== currentChannelId })} id="dropdown-split-basic">
@@ -35,8 +37,8 @@ export default ({ channel: { name, id, removable } }) => {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <Dropdown.Item href="#/action-1" onClick={handleRemove}>Delete</Dropdown.Item>
-          <Dropdown.Item href="#/action-2" onClick={handleRename}>Rename</Dropdown.Item>
+          <Dropdown.Item href="#/action-1" onClick={handleRemove}>{t('chatPage.channelsBlock.dropdown.delete')}</Dropdown.Item>
+          <Dropdown.Item href="#/action-2" onClick={handleRename}>{t('chatPage.channelsBlock.dropdown.rename')}</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     );
@@ -48,7 +50,7 @@ export default ({ channel: { name, id, removable } }) => {
       onClick={handleClick}
     >
       <GrChannel className="me-2 mb-1 d-none d-xl-inline" />
-      {name}
+      {t('chatPage.channelsBlock.channelName', { channelName: name })}
     </button>
   );
 };

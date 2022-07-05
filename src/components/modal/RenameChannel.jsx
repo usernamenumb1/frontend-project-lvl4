@@ -3,11 +3,13 @@ import * as Yup from "yup";
 import { useFormik } from 'formik';
 import { Modal } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { setIsOpen } from "../../slices/modalSlice.js";
 import { apiContext } from "../context/APIProvider.jsx";
 
 export default () => {
   const { emitRenameChannel } = useContext(apiContext);
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.modalStore.isOpen);
   const channelIdToRename = useSelector((state) => state.modalStore.extraData.channelId);
@@ -30,7 +32,7 @@ export default () => {
   return (
     <Modal show={isOpen} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Renaming channel</Modal.Title>
+        <Modal.Title>{t('modals.renameChannel.header')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <form className="d-flex" onSubmit={(e) => { e.preventDefault(); formik.handleSubmit(e); }}>
@@ -47,7 +49,7 @@ export default () => {
             Close
           </button> */}
           <button type="submit" className="d-inline btn btn-outline-maroon">
-            Add channel
+            {t('modals.renameChannel.submitButton')}
           </button>
         </form>
       </Modal.Body>

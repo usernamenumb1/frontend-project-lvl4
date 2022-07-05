@@ -3,11 +3,13 @@ import * as Yup from "yup";
 import { useFormik } from 'formik';
 import { Modal } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { setIsOpen } from "../../slices/modalSlice.js";
 import { apiContext } from "../context/APIProvider.jsx";
 
 export default () => {
   const { emitAddNewChannel } = useContext(apiContext);
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.modalStore.isOpen);
   const formik = useFormik({
@@ -28,7 +30,7 @@ export default () => {
   return (
     <Modal show={isOpen} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Adding channel</Modal.Title>
+        <Modal.Title>{t('modals.addChannel.header')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <form className="d-flex" onSubmit={(e) => { e.preventDefault(); formik.handleSubmit(e); }}>
@@ -45,7 +47,7 @@ export default () => {
             Close
           </button> */}
           <button type="submit" className="d-inline btn btn-outline-maroon">
-            Add channel
+            {t('modals.addChannel.submitButton')}
           </button>
         </form>
       </Modal.Body>

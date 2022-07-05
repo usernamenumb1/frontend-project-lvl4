@@ -1,14 +1,16 @@
 import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 import routes from "../routes.js";
 import { AuthContext } from "./context/AuthProvider.jsx";
 
 const Login = () => {
   // const [isInputValid, setInputValid] = useState('valid');
   const { logIn } = useContext(AuthContext);
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const setIsAuthorised = ({ data }) => {
     logIn(data);
@@ -46,7 +48,7 @@ const Login = () => {
                 <img src="https://i.ibb.co/s3LZHBB/login.jpg" alt="Log in" />
               </div>
               <form onSubmit={(e) => { e.stopPropagation(); e.preventDefault(); formik.handleSubmit(e); }} className="col-12 col-md-6 mt-3 mt-mb-0 needs-validation" noValidate>
-                <h1 className="text-center mb-4">Log in</h1>
+                <h1 className="text-center mb-4">{t('loginPage.header')}</h1>
                 <div className="form-floating mb-3">
                   <input
                     id="username"
@@ -58,7 +60,7 @@ const Login = () => {
                     onChange={formik.handleChange}
                     value={formik.values.username}
                   />
-                  <label htmlFor="name" className="form-label">Name</label>
+                  <label htmlFor="name" className="form-label">{t('loginPage.labels.name')}</label>
                 </div>
                 <div className="form-floating mb-3">
                   <input
@@ -71,11 +73,17 @@ const Login = () => {
                     onChange={formik.handleChange}
                     value={formik.values.password}
                   />
-                  <label htmlFor="password" className="form-label">Password</label>
+                  <label htmlFor="password" className="form-label">{t('loginPage.labels.password')}</label>
                   <div className="invalid-tooltip">{formik.errors.password}</div>
                 </div>
-                <button type="submit" className="w-100 mb-3 btn btn-outline-primary" onClick={console.log(formik.touched)}>Log in</button>
+                <button type="submit" className="w-100 mb-3 btn btn-outline-maroon">{t('loginPage.submitButton')}</button>
               </form>
+            </div>
+            <div className="card-footer p-4">
+              <div className="text-center">
+                <span className="pe-1">{t('loginPage.footer.span')}</span>
+                <Link to={routes.signUpPage()}>{t('loginPage.footer.link')}</Link>
+              </div>
             </div>
           </div>
         </div>

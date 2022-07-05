@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { setIsOpen } from "../../slices/modalSlice";
 import { apiContext } from "../context/APIProvider.jsx";
 
 export default () => {
   const { emitRemoveChannel } = useContext(apiContext);
+  const { t } = useTranslation();
   const isOpen = useSelector((state) => state.modalStore.isOpen);
   const channelIdToRemove = useSelector((state) => state.modalStore.extraData.channelId);
   const dispatch = useDispatch();
@@ -20,12 +22,12 @@ export default () => {
   return (
     <Modal show={isOpen} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Removing channel</Modal.Title>
+        <Modal.Title>{t('modals.removeChannel.header')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>Are you sure? It will be totally destroyed. Absolutely.</p>
+        <p>{t('modals.removeChannel.body')}</p>
         <button type="button" className="d-inline btn btn-outline-maroon" onClick={handleRemove}>
-          Remove channel
+          {t('modals.removeChannel.submitButton')}
         </button>
       </Modal.Body>
     </Modal>

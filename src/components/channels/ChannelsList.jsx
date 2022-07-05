@@ -1,11 +1,13 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { BiPlus } from 'react-icons/bi';
 import Channel from "./Channel.jsx";
 import { setIsOpen } from "../../slices/modalSlice.js";
 
 export default () => {
   const channels = useSelector((state) => state.channelsStore.channels);
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(setIsOpen({ isOpen: true, type: 'ADD_CHANNEL' }));
@@ -13,7 +15,7 @@ export default () => {
   return (
     <div className="col-4  col-md-2 border-end pt-5 px-0 bg-antiqueLight">
       <div className="d-flex justify-content-between mb-2 ps-4 pe-2">
-        <span>Channels</span>
+        <span>{t('chatPage.channelsBlock.header')}</span>
         <button
           type="button"
           className="btn btn-group-vertical maroon p-0 me-2"
