@@ -58,5 +58,12 @@ export default {
       chatName: 'Чат',
       logoutButton: 'Выход',
     },
+    toasts: {
+      successfull: {
+        channelAdded: 'Канал добавлен!',
+        channelRemoved: 'Канал удален!',
+        channelRenamed: 'Канал переименован!',
+      },
+    },
   },
 };

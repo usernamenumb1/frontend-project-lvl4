@@ -4,11 +4,12 @@ import { useFormik } from 'formik';
 import { Modal } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import { setIsOpen } from "../../slices/modalSlice.js";
 import { apiContext } from "../context/APIProvider.jsx";
 
 export default () => {
-  const { emitRenameChannel } = useContext(apiContext);
+  const { renameChannel } = useContext(apiContext);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.modalStore.isOpen);
@@ -23,7 +24,7 @@ export default () => {
     onSubmit: ({ channelName }) => {
       console.log(channelName);
       dispatch(setIsOpen({ type: 'NONE', isOpen: false }));
-      emitRenameChannel(channelIdToRename, channelName);
+      renameChannel({ id: channelIdToRename, name: channelName }).then(() => toast.success(t('toasts.successfull.channelRenamed'))).catch((err) => console.log(err));
     },
   });
   const handleClose = () => {

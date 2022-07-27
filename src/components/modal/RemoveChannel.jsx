@@ -2,11 +2,12 @@ import React, { useContext } from "react";
 import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import { setIsOpen } from "../../slices/modalSlice";
 import { apiContext } from "../context/APIProvider.jsx";
 
 export default () => {
-  const { emitRemoveChannel } = useContext(apiContext);
+  const { removeChannel } = useContext(apiContext);
   const { t } = useTranslation();
   const isOpen = useSelector((state) => state.modalStore.isOpen);
   const channelIdToRemove = useSelector((state) => state.modalStore.extraData.channelId);
@@ -17,7 +18,7 @@ export default () => {
   const handleRemove = () => {
     console.log(channelIdToRemove);
     dispatch(setIsOpen({ type: 'NONE', isOpen: false }));
-    emitRemoveChannel({ id: channelIdToRemove });
+    removeChannel({ id: channelIdToRemove }).then(() => toast.success(t('toasts.successfull.channelRemoved'))).catch((err) => console.log(err));
   };
   return (
     <Modal show={isOpen} onHide={handleClose}>

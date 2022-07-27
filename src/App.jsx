@@ -5,11 +5,9 @@ import {
   Routes,
 } from "react-router-dom";
 import { useSelector } from "react-redux";
-import i18next from 'i18next';
-import { initReactI18next } from 'react-i18next';
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import routes from "./routes.js";
-import resources from "./locales/index.js";
-
 import Login from "./components/Login.jsx";
 import SignUp from "./components/SignUp.jsx";
 import Nav from "./components/Nav.jsx";
@@ -19,14 +17,9 @@ import Chat from "./components/Chat.jsx";
 import Modal from "./components/modal/Modal.jsx";
 
 export default () => {
+  const toastAutoCloseTime = 5000;
   const { isAuthorised } = useContext(AuthContext);
   const type = useSelector((state) => state.modalStore.type);
-  const i18n = i18next.createInstance();
-  i18n.use(initReactI18next).init({
-    lng: 'ru',
-    debug: true,
-    resources,
-  });
   return (
     <div className="d-flex flex-column h-100">
       <Nav />
@@ -37,6 +30,17 @@ export default () => {
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Modal type={type} />
+      <ToastContainer
+        position="top-right"
+        autoClose={toastAutoCloseTime}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };
