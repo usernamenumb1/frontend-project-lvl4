@@ -35,8 +35,8 @@ export default () => {
     );
   }
   return (
-    <div className="container h-100 my-4 shadow rounded">
-      <div className="row bg-white h-100 flex-md-row">
+    <div className="container h-100 my-4 shadow rounded-1 overflow-hidden">
+      <div className="row h-100 bg-white flex-md-row">
         <ChannelsList />
         <div className="col h-100 p-0">
           <div className="d-flex flex-column h-100">
